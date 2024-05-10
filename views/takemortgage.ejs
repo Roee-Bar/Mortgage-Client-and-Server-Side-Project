@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>הלוואה רגילה</title>
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link href='https://fonts.googleapis.com/css?family=Noto Sans Hebrew' rel='stylesheet'>
+  <link rel="stylesheet" href="/styles/style.css" />
+  <script src="/scripts/takemortgage.js" defer></script>
+  <!-- Disability tool -->
+
+  <link rel="icon" type="image/png" href="images/icon.png">
+  <style>
+    td {
+    padding: 20px; /* Adjust this value to set the desired padding between columns */
+  }
+  </style>
+</head>
+
+<body>
+  <%- include('sidebar') %>
+  <div class="main">
+  <div class="container d-flex justify-content-center align-items-center vh-100">
+    <div class="col-md-12 col-lg-9">
+        <% if (typeof success !=='undefined' && success==true) { %>
+          <script>
+              window.addEventListener("load", () => {
+                  cleanLocalStorage();
+              });
+          </script>
+        <% } %>
+
+        <% if (typeof loginRedirect !=='undefined' && loginRedirect==true) { %>
+          <script>
+              window.addEventListener("load", () => {
+                  loadMortgageForm();
+              });
+          </script>
+        <% } %>
+        <% if (typeof success !== 'undefined' && success == true) { %>
+          <table>
+            <tr>
+              <td style="white-space: nowrap; word-break: break-all;">יש ליצור קשר עם הבנק</td>
+              <td colspan="8"><img src="/images/arrow.png" style="width: 100%;" alt="Image"></td>
+              <td style="white-space: nowrap; word-break: break-all;">נא לספק ת.ז, פרטי חשבון בנק<br>פרטים נוספים לפי הצורך</td>
+              <td colspan="8"><img src="/images/arrow.png" style="width: 100%;" alt="Image"></td>
+              <td>יש לשלוח 3 משכורות אחרונות</td>
+              <td colspan="8"><img src="/images/arrow.png" style="width: 100%;" alt="Image"></td>
+              <td>הכסף מתקבל בחשבון</td>
+            </tr>
+            <tr>
+              <td  colspan="4">מחפש נותן שירות או צריך עזרה בתהליך? <a href="/contact">פנה אלינו</a></td>
+            </tr>
+            <tr>
+              <td  colspan="4"><p><b>עלויות משוערות:</b></p><p>פתיחת תיק : 1000 ש"ח</p><p>עמלת ביצוע פעולה : 0.1%</p></td>
+            </tr>
+          </table>
+          <% } %>
+          <% if (typeof success !== 'undefined' && success === "nl") { %> 
+            <h1>מצטערים, חייב להתחבר כדי לקבל תוצאה</h1>
+          <% } %>
+          <% if (typeof error !== 'undefined' && error) { %> 
+            <h1>שגיאה בקליטת הנתונים!</h1>
+          <% } %>
+      <% if (typeof success !== 'undefined' && success === "no result") { %> 
+        <form method="POST" action="takemortgage" onsubmit="return mortgageForm()">
+          <div class="titleCard text-center align-items-center">
+          <h2 id="mortgage-title">הגשת בקשה להלוואה אחת</h2>
+          </div>
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <span style="color: #203f61">בחר שיטת החזר רצויה</span>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">
+                          <i id="iconDesign" class="fas fa-file-signature"></i></span>
+                    </div>
+                    <select name="rtmethod" id="rtmethod"
+                        class="custom-select" required>
+                        <option value="" disabled selected> לחץ כדי לבחור</option>
+                        <option value="Option1">ריבית פריים</option>
+                        <option value="Option2">ריבית קבועה צמודה למדד</option>
+                        <option value="Option3">ריבית קבועה לא צמודה</option>
+                        <option value="Option4">אחר</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-6 mb-3">
+              <span style="color: #203f61">שם הבנק בו מתנהל חשבונך</span>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">
+                          <i id="iconDesign" class="fas fa-university"></i></span>
+                    </div>
+                    <select name="bank" id="bank"
+                        class="custom-select" required>
+                        <option value="" disabled selected>לחץ לבחירת הבנק שלך</option>
+                        <option value="Discont">בנק דיסקונט לישראל
+                            בע"מ</option>
+                        <option value="Hapoalim">בנק הפועלים בע"מ
+                        </option>
+                        <option value="Yahav">בנק "יהב" לעובדי
+                            מדינה בע"מ</option>
+                        <option value="BankJerusalem">בנק ירושלים בע"מ
+                        </option>
+                        <option value="Leumi">בנק לאומי לישראל
+                            בע"מ</option>
+                        <option value="OneZero">וואן זירו הבנק
+                            הדיגיטלי בע"מ</option>
+                        <option value="Mizrahi">בנק מזרחי טפחות בע"מ
+                        </option>
+                        <option value="Massad">בנק מסד בע"מ
+                        </option>
+                        <option value="Merkantil">בנק מרכנתיל דיסקונט
+                            בע"מ</option>
+                        <option value="BeinLeumi">הבנק הבינלאומי
+                            הראשון לישראל בע"מ</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-6 mb-3">
+              <span style="color: #203f61">כמה כסף אתה מעוניין להלוות</span>
+                <div class="input-group">
+                    <div class="input-group-prepend " style="height: 38px;">
+                        <span class="input-group-text">
+                          <i id= "iconDesign" class="bi bi-coin"></i>
+                        </span>
+                    </div>
+                    <input name="loanAmount" id="loanAmount"
+                        type="number" min="0" max="100"
+                        class="form-control"
+                        placeholder="הכנס סכום ההלוואה המבוקש*"
+                        required>
+                </div>
+                <label class="form-check-label" for="fixedLoan">
+                  *באלפים, עד 100 אלף
+                </label>
+            </div>
+            <div class="col-md-6 mb-3">
+              <span style="color: #203f61">אזרחות נוכחית</span>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">
+                          <i id="iconDesign" class="fas fa-flag"></i></span>
+                    </div>
+                    <select name="citizenship" id="citizenship"
+                        class="custom-select" required>
+                        <option value="" disabled selected>לחץ כדי לבחור</option>
+                        <option value="Israeli">ישראלית</option>
+                        <option value="American">אמריקאית</option>
+                        <option value="European">אירופאית</option>
+                        <option value="Other">אחר</option>
+                    </select>
+                  </div>
+            </div>
+        </div>
+          <div class="form-check mb-3">
+            <input class="form-check-input" type="checkbox" name="offerEstimate" id="offerEstimateYes" value="yes" required>
+            <label class="form-check-label" for="offerEstimateYes">
+              <b>כן, אני מבין שההצעה היא רק להערכה</b>
+            </label>
+          </div>
+          <div class="form-check mb-3">
+            <input class="form-check-input" type="checkbox" name="termsAgreement" id="termsAgreementYes" value="yes" required>
+            <label class="form-check-label" for="termsAgreementYes">
+              <b>כן, קראתי והסכמתי לתנאי השירות</b>
+            </label>
+          </div>
+          <a href="/pdf/terms.pdf" target="_blank">תנאי השירות</a>
+          <button type="submit" class="btn btn-custom btn-block">חשב</button>
+        </form>
+        <% } %>
+      </div>
+    </div>
+  </div>
+  <!-- jQuery library -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <!-- Popper JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <!-- Latest compiled JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+  <script>
+  </script>
+</body>
+
+</html>

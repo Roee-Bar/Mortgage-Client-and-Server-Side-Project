@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>איפוס סיסמה</title>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <link href='https://fonts.googleapis.com/css?family=Noto Sans Hebrew' rel='stylesheet'>
+    <link rel="stylesheet" type="text/css" href="/styles/style.css" />
+    <link rel="icon" type="image/png" href="images/icon.png">
+  </head>
+
+  <body>
+    <%- include('sidebar') %>
+    <div class="main">
+    <div class="container d-flex justify-content-center align-items-center vh-100">
+      <div class="col-md-6 col-lg-4">
+        <form method="POST" action="/newpass">
+          <div class="titleCard text-center align-items-center">
+          <h2 id="login-title whi">איפוס סיסמה</h2>
+          </div>
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text"><i id ="iconDesign" class="fas fa-user"></i></span>
+            </div>
+            <input
+              id="password"
+              name="password"
+              type="text"
+              class="form-control"
+              placeholder="סיסמה חדשה"
+              required
+            />
+          </div>
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text"><i id ="iconDesign" class="fas fa-lock"></i></span>
+            </div>
+            <input
+              id="rpassword"
+              name="rpassword"
+              type="password"
+              class="form-control"
+              placeholder="סיסמה חוזרת"
+              required
+            />
+          </div>
+          <button type="submit" class="btn btn-custom btn-block">
+            איפוס
+          </button>
+          <a href="/">חזרה לדף הראשי</a>
+        </form>
+
+        <script>
+          const urlParams = new URLSearchParams(window.location.search);
+          const error = urlParams.get("result");
+          const errorMessage = document.createElement("p");
+          errorMessage.classList.add("text-success");
+          document.querySelector("form").appendChild(errorMessage);
+          switch(error) {
+            case 'true':
+              errorMessage.textContent = "הסיסמה אופסה ";
+              break;
+            case 'false':
+              errorMessage.classList.add("text-danger");
+              errorMessage.textContent = "הסיסמה לא אופסה";  
+              break;
+            case 'notmatch':
+              errorMessage.classList.add("text-danger");
+              errorMessage.textContent = "הסיסמאות שונות";  
+              break;
+            default:
+              document.querySelector("form").appendChild(errorMessage);
+          }
+          
+        </script>
+      </div>
+    </div>
+    </div>
+  </body>
+</html>

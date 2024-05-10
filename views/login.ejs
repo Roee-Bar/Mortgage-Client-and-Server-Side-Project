@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Login</title>
+  <link rel="stylesheet" type="text/css" href="/styles/style.css" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+  <link href='https://fonts.googleapis.com/css?family=Noto Sans Hebrew' rel='stylesheet'>
+  <link rel="icon" type="image/png" href="images/icon.png">
+</head>
+
+<body>
+  <%- include('sidebar') %>
+    <div class="main">
+      <div class="container d-flex justify-content-center align-items-center vh-100">
+        <div class="col-md-6 col-lg-4">
+          <form method="POST" action="/login">
+            <h2 class="logintitle" id="login-title whi">התחברות</h2>
+            <% if (typeof success !=='undefined' && success==="nl" ) { %>
+              <h3 style="color:red">צריך להתחבר כדי לחשב משכנתא</h3>
+              <% } %>
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i id ="iconDesign" class="fas fa-user"></i></span>
+                  </div>
+                  <input id="email" name="username" type="text" class="form-control" placeholder="כתובת מייל"
+                    required />
+                </div>
+                <p id="emailError" class="error"></p>
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i id ="iconDesign" class="fas fa-lock"></i></span>
+                  </div>
+                  <input id="password" name="password" type="password" class="form-control" placeholder="סיסמה"
+                    required />
+                </div>
+                <% if (typeof validEmail !=='undefined' && validEmail==="false" ) { %>
+                  <p style="color:red">אימייל לא תקין</p>
+                <% } %>
+                <% if (typeof validPassword !=='undefined' && validPassword==="false" ) { %>
+                  <p style="color:red">סיסמה לא נכונה</p>
+                <% } %>
+                <p id="passwordError" class="error"></p>
+                <button type="submit" id="submitLoginbutton" class="btn btn-block">
+                  התחבר
+                </button>
+                <p>צריך חשבון? <a href="Signup">הרשמה</a></p>
+                <p>שכחת סיסמה? <a href="restore">שחזור סיסמה</a></p>
+          </form>
+
+          <script>
+            document.addEventListener("DOMContentLoaded", function () {
+              try {
+                const form = document.querySelector("form");
+                if (!form) {
+                  console.error("Form not found on the page.");
+                  return;
+                }
+                // Reset URL parameters after processing
+                window.history.replaceState({}, document.title, window.location.pathname);
+              } catch (error) {
+                console.error("Error in script:", error);
+              }
+            });
+          </script>
+          <script src="/scripts/login.js"></script>
+        </div>
+      </div>
+    </div>
+</body>
+
+</html>

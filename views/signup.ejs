@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>הרשמה</title>
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <script src="/scripts/signup.js"></script>
+  <link href='https://fonts.googleapis.com/css?family=Noto Sans Hebrew' rel='stylesheet'>
+  <link rel="stylesheet" href="/styles/style.css" />
+
+  <link rel="icon" type="image/png" href="images/icon.png">
+</head>
+
+<body>
+  <%- include('sidebar') %>
+    <div class="main">
+      <div class="container d-flex justify-content-center align-items-center vh-100">
+        <div class="col-md-6 col-lg-4">
+          <form method="POST" action="/signup" onsubmit="return signUpForm()">
+            <h2 id="login-title" class="logintitle">הרשמה</h2>
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text"><i id ="iconDesign" class="fas fa-user"></i></span>
+              </div>
+              <input name="fname" id="firstname" type="text" class="form-control" placeholder="שם פרטי" required>
+            </div>
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text"><i id ="iconDesign" class="fas fa-user"></i></span>
+              </div>
+              <input name="lname" id="lname" type="text" class="form-control" placeholder="שם משפחה" required>
+            </div>
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text"><i id ="iconDesign" class="fas fa-at"></i></span>
+              </div>
+              <input name="email" id="email" type="text" class="form-control" placeholder="כתובת מייל" required>
+            </div>
+            <p id="emailError" class="error"></p>
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text"><i id ="iconDesign" class="fas fa-phone"></i></span>
+              </div>
+              <input name="phone" id="phone" type="text" class="form-control" placeholder="טלפון" required>
+            </div>
+            <p id="phoneError" class="error"></p>
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text"><i id ="iconDesign" class="fas fa-lock"></i></span>
+              </div>
+              <input name="password" id="password" type="password" class="form-control" placeholder="סיסמה" required>
+            </div>
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text"><i id ="iconDesign" class="fas fa-lock"></i></span>
+              </div>
+              <input name="rpassword" id="confirm-password" type="password" class="form-control"
+                placeholder="סיסמה חוזרת" required>
+            </div>
+            <p id="confirmPasswordError" class="error"></p>
+            <button type="submit" id="submitsignupbutton" class="btn btn-block">הירשם</button>
+            <% if (typeof valresult !=='undefined' && valresult=="passnotmatch" ) { %>
+              <p style="color:red">סיסמאות לא תואמות</p>
+            <% } %>
+            <% if (typeof valresult !=='undefined' && valresult=="invalidFname" ) { %>
+              <p style="color:red"> שם פרטי לא תקין נסה להזין ידנית</p>
+            <% } %>
+            <% if (typeof valresult !=='undefined' && valresult=="invalidLname" ) { %>
+              <p style="color:red">שם משפחה לא תקין נסה להזין ידנית</p>
+            <% } %>
+            <% if (typeof valresult !=='undefined' && valresult=="falsePhone" ) { %>
+              <p style="color:red">טלפון לא תקין</p>
+            <% } %>
+            <p>קיים כבר משתמש? <a href="/login">התחברות</a></p>
+            <p></p>
+          </form>
+        </div>
+      </div>
+
+      <!-- Modal -->
+      <div class="modal fade" id="signupModal" tabindex="-1" role="dialog" aria-labelledby="signupModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="signupModalLabel">פרטי התחברות</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <p><strong>אי-מייל:</strong> <span id="modalEmail"></span></p>
+              <p><strong>סיסמה:</strong> <span id="modalPassword"></span></p>
+              <p class="text-success">החשבון נפתח בהצלחה!</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!-- Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="/scripts/signup.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        try {
+          const urlParams = new URLSearchParams(window.location.search);
+          const show = urlParams.get("show");
+          const error = urlParams.get("error");
+          const errorMessage = document.createElement("p");
+          errorMessage.classList.add("text-danger");
+          const form = document.querySelector("form");
+
+          if (!form) {
+            console.error("Form not found on the page.");
+            return;
+          }
+
+          form.appendChild(errorMessage);
+
+          if (show) {
+            email = urlParams.get("email");
+            password = urlParams.get("password");
+            modalEmail = document.getElementById("modalEmail");
+            modalPassword = document.getElementById("modalPassword");
+
+            if (modalEmail && modalPassword) {
+              modalEmail.innerHTML = email;
+              modalPassword.innerHTML = password;
+              $('#signupModal').modal('show');
+            } else {
+              console.error("Modal elements not found on the page.");
+            }
+          }
+
+          switch (error) {
+            case 'Email already exists':
+              errorMessage.textContent = "אימייל כבר תפוס";
+              break;
+            case 'Phone number already exists':
+              errorMessage.textContent = "הקלד טלפון חוקי";
+              break;
+            default:
+              form.appendChild(errorMessage);
+          }
+
+          // Reset URL parameters after processing
+          window.history.replaceState({}, document.title, window.location.pathname);
+        } catch (error) {
+          console.error("Error in script:", error);
+        }
+      });
+    </script>
+
+
+
+</body>
+
+</html>

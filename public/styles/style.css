@@ -1,0 +1,185 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+body {
+    /* Set the background image */
+    background-image: url(/images/professional-background.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    /* Full height */
+    height: 100vh;
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-size: cover;
+    font-family: 'Noto Sans Hebrew';
+    /* Choose appropriate font */
+    margin-top: 0;
+    padding: 0;
+    
+}
+
+@media (max-width: 500px) {
+    /* Apply overflow-y: auto; when in landscape mode on small screens */
+    body {
+        overflow-y: auto;
+    }
+}
+
+.form-check-label {
+    vertical-align: middle; /* Align the checkbox vertically in the middle */
+    margin-right: 20px; /* Add some space between the checkbox and the label */
+}
+
+.error {
+    color: red;
+    font-size: 0.8em;
+    margin-top: 0.2em;
+    display: block;
+}
+
+.success {
+    color: green;
+    font-size: 0.8em;
+    margin-top: 0.2em;
+    display: block;
+
+}
+
+#mainContent {
+
+    margin-top: 100px;
+    line-height: 1.5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 1rem;
+    width: 60%;
+}
+
+#carouselExampleAutoplaying {
+    width: 45%;
+
+    margin: auto;
+}
+
+
+/* Media Query for 500px width and below */
+@media (max-width: 500px) {
+
+    /* Adjust carousel width and center it */
+    #carouselExampleAutoplaying {
+        width: 95%;
+        /* margin: auto; */
+    }
+
+    /* Adjust mainContent font size */
+    #mainContent {
+        font-size: 0.5rem;
+    }
+}
+
+@media (max-width: 600px) {
+    #mainContent {
+        font-size: 0.7rem;
+    }
+}
+
+@media (max-width: 768px) {
+
+    /* Limit carousel width */
+    #carouselExampleAutoplaying {
+        width: 50%;
+        margin: auto;
+    }
+
+    #mainContent {
+        font-size: 0.8rem;
+    }
+}
+
+@media (max-width: 900px) {
+
+    /* Limit carousel width */
+    #carouselExampleAutoplaying {
+        width: 50%;
+        margin: auto;
+    }
+
+    #mainContent {
+        font-size: 0.9rem;
+    }
+}
+
+/* Style for contact US page */
+.container .btn-custom {
+    background-color: #0e2238;
+    color: white;
+    transition: 0.2s;
+}
+
+.container .btn-custom:hover {
+    background-color: #173c62;
+    color: white;
+}
+
+.container .form-control {
+    opacity: 85%;
+}
+
+.container .titleCard {
+    background-color: #203f61;
+    color: white;
+    margin-bottom: 15px;
+    padding: 10px;
+}
+
+.custom-select {
+    background-position: left;
+    padding-right: 0.65rem;
+    opacity: 85%;
+    background-position-x: 2px;
+}
+
+.logintitle {
+    background-color: #173c62;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    font-size: 30px;
+    margin-bottom: 20px;
+}
+
+#submitLoginbutton {
+    background-color: #0e2238;
+    color: white;
+    transition: 0.2s;
+    margin-bottom: 15px;
+
+}
+
+#submitLoginbutton:hover {
+    background-color: #173c62;
+    color: white;
+
+}
+
+#submitsignupbutton {
+    background-color: #0e2238;
+    color: white;
+    transition: 0.2s;
+    margin-bottom: 15px;
+
+}
+
+#submitsignupbutton:hover {
+    background-color: #173c62;
+    color: white;
+}
+
+#iconDesign{
+    margin-bottom: 7px;
+    color: #203f61;
+}

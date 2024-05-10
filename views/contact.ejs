@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>צור קשר</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href='https://fonts.googleapis.com/css?family=Noto Sans Hebrew' rel='stylesheet'>
+    <link rel="stylesheet" href="/styles/style.css" />
+    <link rel="icon" type="image/png" href="images/icon.png">
+
+   
+</head>
+<body>
+
+    <%- include('sidebar') %>
+    <div class="main">
+    <div class="container d-flex justify-content-center align-items-center vh-100">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="mb-4">
+                    <% if (result == false) { %> 
+                        <h1>הייתה שגיאה, נסה במועד מאוחר יותר</h1>
+                    <% } %>
+                    <% if (result == true) { %> 
+                        <h1>נשלח בהצלחה, ניצור קשר בהקדם!</h1>
+                    <% } %>
+                    <% if (result == "no result") { %>
+                    <form method="POST" action="/contact" onsubmit="return contactForm()">
+                        <div class="titleCard text-center align-items-center">
+                        <h2>צור קשר</h2>
+                        </div>
+                        <div class="row mb-4">
+                            <div class="col text-center"> 
+                                <div class="address details">
+                                  <i class="fas fa-map-marker-alt mb-2" style="font-size: 25px; color:#0e2238"></i>
+                                  <div class="topic" style="font-size: 18px; font-weight: 650; color:#0e2238">Address</div>
+                                  <div class="text-one">Karmiel, Snunit 51</div>
+                                </div>
+                            </div>
+
+                            <div class="col text-center">
+                                <div class="phone details">
+                                  <i class="fas fa-phone-alt mb-2" style="font-size: 25px; color:#0e2238"></i>
+                                  <div class="topic" style="font-size: 18px; font-weight: 650; color: #0e2238;">Phone</div>
+                                  <div class="text-one">4-908-6411 972+</div>
+                                </div>
+                            </div>
+
+                            <div class="col text-center">
+                                <div class="email details">
+                                  <i class="fas fa-envelope mb-2" style="font-size: 25px; color:#0e2238"></i>
+                                  <div class="topic" style="font-size: 18px; font-weight: 650; color:#0e2238">Email</div>
+                                  <div class="text-one">calc.task@gmail.com</div>
+                                </div>
+                            </div>
+                        </div>
+                            
+                        <div class="row">
+                            <div class="col-md-6">
+                                <input name="fname" id="fname" type="text" class="form-control mb-3" placeholder="שם פרטי*" required>
+                            </div>
+                            <div class="col-md-6">
+                                <input name="lname" id="lname" type="text" class="form-control mb-3" placeholder="שם משפחה*" required>
+                            </div>
+                            <div class="col-md-6">
+                                <input name="phone" id="phone" type="text" class="form-control mb-3" placeholder="טלפון*" required>
+                            </div>
+                            <div class="col-md-6">
+                                <input name="email" id="email" type="text" class="form-control mb-3" placeholder="אימייל*" required>
+                            </div>
+                        </div>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <label class="input-group-text" for="choose"><i id="iconDesign" class="fas fa-info-circle"></i></label>
+                            </div>
+                            <select name="selection" class="custom-select"  required>
+                                <option value="" disabled selected>בחר אפשרות*</option>
+                                <option value="ProblemLog">תקלה בכניסה למשתמש</option>
+                                <option value="PageBad">דפים לא נטענים</option>
+                                <option value="MortgageProb">תקלה בבקשת משכנתא</option>
+                                <option value="LoanProb">תקלה בבקשת הלוואה</option>
+                                <option value="Other">אחר</option>
+                            </select>
+                        </div>
+                        <textarea name="subject" id="subject" class="form-control mb-3" placeholder="נושא*"></textarea>
+                        <button id="login-btn" type="submit" class="btn btn-custom btn-block">שלח</button>
+                        <div id="validation"></div>
+                        <div id="rules"></div>
+                    </form>
+                    <% } %>
+                </div>
+            
+        </div>
+    </div>
+    </div>
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<!-- Popper JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script src="/scripts/contact.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,242 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+::after,
+::before {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    top: 0.3rem;
+
+}
+
+a {
+    text-decoration: none;
+}
+
+li {
+    list-style: none;
+}
+
+h1 {
+    font-weight: 600;
+    font-size: 1.5rem;
+}
+
+body {
+    font-family: 'Noto Sans Hebrew';
+}
+
+.wrapper {
+    position: relative;
+    display: flex;
+}
+
+.main {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100dvh;
+    width: calc(100% - 70px);
+    transition: all 0.35s ease-in-out;
+    background-position: center;
+    background-size: cover;
+    
+}
+
+#sidebar {
+    width: 70px;
+    min-width: 70px;
+    z-index: 1000;
+    transition: all .25s ease-in-out;
+    background-color: #0e2238;
+    display: flex;
+    flex-direction: column;
+    height: 100dvh;
+    overflow-y: hidden;
+    overflow-x: hidden;
+}
+@media (max-width: 500px) {
+    /* Apply overflow-y: auto; when in landscape mode on small screens */
+    #sidebar {
+        overflow-y: auto;
+    }
+    
+    main {
+        overflow-y: auto;
+    }
+
+}
+@media only screen and (max-height: 500px) and (orientation: landscape) {
+    /* Apply overflow-y: auto; when in landscape mode on small screens */
+    #sidebar {
+        height:400px;
+        overflow-y: auto;
+    }
+}
+
+#sidebar.expand {
+    width: 260px;
+    min-width: 260px;
+}
+
+.toggle-btn {
+    background-color: transparent;
+    cursor: pointer;
+    border: 0;
+    padding: 1rem 1.5rem;
+}
+
+.toggle-btn i {
+    font-size: 1.5rem;
+    color: #FFF;
+}
+
+.sidebar-logo {
+    margin: auto 0;
+}
+
+.sidebar-logo a {
+    color: #FFF;
+    font-size: 1.35rem;
+    font-weight: 600;
+    position: relative;
+    right: 1.7rem;
+}
+
+#sidebar:not(.expand) .sidebar-logo,
+#sidebar:not(.expand) a.sidebar-link span {
+    display: none;
+}
+
+.sidebar-nav {
+    padding: 2rem 0;
+    flex: 1 1 auto;
+}
+
+a.sidebar-link {
+    padding: .625rem 1.625rem;
+    color: #FFF;
+    display: block;
+    font-size: 0.9rem;
+    white-space: nowrap;
+    border-left: 3px solid transparent;
+}
+
+.sidebar-link i {
+    font-size: 1.1rem;
+    margin-left: .75rem;
+}
+
+a.sidebar-link:hover {
+    background-color: rgba(255, 255, 255, .075);
+    border-left: 3px solid #3b7ddd;
+}
+
+.sidebar-item {
+    position: relative;
+}
+
+
+#sidebar:not(.expand) .sidebar-item .sidebar-dropdown {
+    position: absolute;
+    top: 0;
+    left: 70px;
+    background-color: #0e2238;
+    padding: 0;
+    min-width: 15rem;
+    display: none;
+}
+
+#sidebar:not(.expand) .sidebar-item:hover .has-dropdown+.sidebar-dropdown {
+    display: block;
+    max-height: 15em;
+    width: 100%;
+    opacity: 1;
+}
+
+#sidebar.expand .sidebar-link[data-bs-toggle="collapse"]::after {
+    border: solid;
+    border-width: 0 .075rem .075rem 0;
+    content: "";
+    display: inline-block;
+    padding: 2px;
+    position: absolute;
+    left: 1.25rem;
+    top: 1.4em;
+    transform: rotate(-135deg);
+    transition: all .2s ease-out;
+}
+
+#sidebar.expand .sidebar-link[data-bs-toggle="collapse"].collapsed::after {
+    transform: rotate(45deg);
+    transition: all .2s ease-out;
+}
+
+.list-unstyled {
+    padding-left: 0;
+    list-style: none;
+    padding-right: 0;
+}
+
+.indent i {
+    margin-right: 1.5rem;
+}
+
+.indentless i {
+    margin-right: 0.7rem;
+}
+
+.sidebar-link.active {
+    background-color: rgba(255, 255, 255, .075);
+    border-left: 3px solid #3b7ddd;
+}
+
+.tooltip-icon {
+    font-size: 0.8rem;
+    color: #999999;
+    position: absolute;
+    right: 219px;
+    bottom: 16px;
+}
+
+.tooltip-icon .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+
+    /* Position the tooltip */
+    position: absolute;
+    z-index: 1;
+}
+
+.tooltip-icon:hover .tooltiptext {
+    visibility: visible;
+}
+
+a.asw-menu-btn {
+    left: 20px;
+    bottom: 20px;
+    width: 40px;
+    height: 40px;
+}
+div.asw-menu {
+    position: fixed;
+    left: 0;
+    top: 0;
+    box-shadow: 0 0 20px #00000080;
+    opacity: 97%;
+    transition: .3s;
+    z-index: 500000;
+    overflow: hidden;
+    background: #eff1f5;
+    width: 370px;
+    line-height: 1;
+    font-size: 16px;
+    height: 100%;
+    letter-spacing: .015em;
+}
