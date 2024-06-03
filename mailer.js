@@ -4,8 +4,9 @@ function restorePassword(email, password) {
     var transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
-            user: 'mashcantarestore@gmail.com',
-            pass: 'zerd opzi lnnr cdrw'
+            /*Data was removed to not expose email and password to the public*/
+            user: '',
+            pass: ''
         }
     });
 
